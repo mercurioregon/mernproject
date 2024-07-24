@@ -1,0 +1,21 @@
+{
+  "name": "reactfullstack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "run start",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build",
+    "render-build": "npm install && npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@apollo/server": "^4.10.5",
+    "concurrently": "^8.2.2",
+    "express": "^4.19.2",
+    "path": "^0.12.7"
+  }
+}

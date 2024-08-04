@@ -17,10 +17,18 @@ type Book {
     title: String!
     
 }
-
+type Auth {
+    token: ID!
+    user: User
+}
 type Query {
     me:User
 }
+
+type Mutation {
+    login(email: String!, password: String!)
+}
+
 
 `
 // Needs query for autentication''

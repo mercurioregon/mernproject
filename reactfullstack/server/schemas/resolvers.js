@@ -1,4 +1,5 @@
 const {User} = require ("../models")
+const {AuthError, createToken}=require ("../utils/auth")
 const resolvers= {
         Query: {
             me:async (parent, args, context)=>{
@@ -6,7 +7,20 @@ const resolvers= {
                 {const userData= await User.findOne({_id:context.user._id})
                 return userData
             }else
-                {console.log("Not logged in")}
+                {throw AuthError}
+        }
+    },
+    Mutation:{
+        login: async (parent, {email, password})=>{
+            const user = await User.fimdOne({email})
+            if(!user){
+                throw AuthError
+            }
+            const didPassMatch=user.isPassCorrect(password)
+            if (!didPassMatch){
+                throw AuthError
+            }
+            const token = createToken(user)
         }
     }
 }

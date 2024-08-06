@@ -21,7 +21,13 @@ const resolvers= {
                 throw AuthError
             }
             const token = createToken(user)
+                return {token,user}
+        },
+        addUser: async (parent,args)=>{
+            const user = await User.create(args)
+            const token= createToken(user)
+            return({token, user})
         }
-    }
-}
+    }       
+} 
 module.exports=resolvers

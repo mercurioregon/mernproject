@@ -1,5 +1,6 @@
 const {Schema,model} = require("mongoose")
 const bookSchema = require("./Book")
+const bcrypt = require ("bcrypt")
 const userSchema= new Schema (
     {
         username: {
@@ -23,6 +24,9 @@ const userSchema= new Schema (
                         //when objects get complicated you can create a seperate schema here.
     }
 )
+userSchema.methods.isPassCorrrect= async function(pass){
+ return bcrypt.compare(pass, this.pass)
+}
 const User=model("User", userSchema)
 
 module.exports= User

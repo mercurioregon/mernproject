@@ -4,7 +4,7 @@ const {ApolloServer} = require("@apollo/server")
 const {expressMiddleware}=require("@apollo/server/express4")
 const {typeDefs, resolvers}= require("./schemas")
 const PORT = process.env.PORT || 3001
-const {authMiddleware}=require("./utils/auth")
+
 const server = new ApolloServer({
     typeDefs,
     resolvers

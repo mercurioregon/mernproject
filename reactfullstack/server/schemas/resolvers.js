@@ -27,7 +27,30 @@ const resolvers= {
             const user = await User.create(args)
             const token= createToken(user)
             return({token, user})
-        }
-    }       
-} 
+        },
+        saveBook: async(parent, { bookId }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { savedBooks: bookData }},
+                    { new: true}
+                );
+            
+            }
+        },
+        removeBook: async(parent, { bookId }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { savedBooks: bookId }},
+                    { new: true}
+                );
+
+                return updatedUser;
+            }
+            throw AuthenticationError;
+        },
+
+    } ,  
+} ;
 module.exports=resolvers

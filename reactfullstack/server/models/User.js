@@ -12,7 +12,7 @@ const userSchema= new Schema (
             type:String,
             required: true,
             unique: true,
-            match:[/.+@+\..+/, "please use valid format"]
+            match:[/.+@.+\..+/, "please use valid format"]
                         //REQUIRES AN EMAIL ADDRESS ONLY IN THIS FIELD
 
         },
@@ -24,6 +24,13 @@ const userSchema= new Schema (
                         //when objects get complicated you can create a seperate schema here.
     }
 )
+userSchema.pre("save", async function(next){
+    if (this.isNew || this.isModified("password")){
+        const salt=10;
+        this.password= await bcrypt.hash(this.password, salt)
+    }
+    next()
+})
 userSchema.methods.isPassCorrrect= async function(pass){
  return bcrypt.compare(pass, this.pass)
 }

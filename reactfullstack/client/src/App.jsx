@@ -1,15 +1,16 @@
 import "./App.css"
 import {Outlet} from "react-router-dom"
+import NavBar from "./components/NavBar/index.jsx"
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  CreateHttpLink,
+  createHttpLink,
 
 } from "@apollo/client"
 
 import {setContext} from "@apollo/client/link/context"
-const backendLink = CreateHttpLink({uri:"/graphql"})
+const backendLink = createHttpLink({uri:"/graphql"})
 const auth = setContext((_, {headers})=>{
   const token= localStorage.getItem("id_token")
   return{
@@ -22,15 +23,16 @@ const auth = setContext((_, {headers})=>{
 
 
 const client = new ApolloClient({
-  link: auth.concat(backendLink)
+  link: auth.concat(backendLink),
+  cache: new InMemoryCache
 
 })
 function App() {
   return (
     <ApolloProvider client = {client}>
-
+      <NavBar/>
+      <Outlet/>
     </ApolloProvider>
-    
-
   )
 }
+export default App

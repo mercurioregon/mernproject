@@ -7,11 +7,11 @@ class Authenticator {
     getToken (){
         return localStorage.getItem("id_token")
     }
-    setToken (){
+    setToken (idToken){
        localStorage.setItem("id_token"), idToken
        window.location.assign("/")
     }
-    logout(){
+    removeToken(){
         localStorage.removeItem("id_token")
         window.location.assign("/")
     }
@@ -24,4 +24,9 @@ class Authenticator {
             else return false
         } catch (err) {return console.log ("Error")}
     }
+    isLoggedIn(){
+        const token = this.getToken()
+        return !!token && !this.isExpired(token)
+    }
 }
+export default new Authenticator()

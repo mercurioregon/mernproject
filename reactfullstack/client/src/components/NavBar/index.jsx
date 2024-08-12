@@ -1,10 +1,11 @@
 import {Link} from "react-router-dom"
 
 import {Navbar, Container, Tab, Modal, Nav} from "react-bootstrap"
+import Auth from "../../utils/auth"
 const myNav =()=>{
     return(
         <>
-        <Navbar>
+        <Navbar bg= "light" expand= "lg">
             <Container fluid>
                 <Navbar.Brand as ={Link} to ="/">
                     The Uncle Five Book Search
@@ -15,10 +16,15 @@ const myNav =()=>{
                     <Nav.Link as ={Link} to = "/">
                     Search For a Book
                     </Nav.Link>
+                    {Auth.isLoggedIn?
+                    <>
+                    <Nav.Link as ={link} to ="./savedBooks">
+                        Your Saved Books
+                    </Nav.Link>
+                    </>
+                }
                     </Nav>
                 </Navbar.Collapse>
-
-             
             </Container>
         </Navbar>
         </>

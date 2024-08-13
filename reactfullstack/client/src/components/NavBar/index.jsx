@@ -2,7 +2,10 @@ import {Link} from "react-router-dom"
 
 import {Navbar, Container, Tab, Modal, Nav} from "react-bootstrap"
 import Auth from "../../utils/auth"
+import {useState} from "react"
+
 const myNav =()=>{
+    const [showModal, setShowModal]= useState(false)
     return(
         <>
         <Navbar bg= "light" expand= "lg">
@@ -26,7 +29,9 @@ const myNav =()=>{
                     </> 
                     ):(
                         <>
-                    <Nav.Link>
+                    <Nav.Link onClick={()=>{
+                        setShowModal(true)
+                    }}>
                         Login / SignUp
                     </Nav.Link>
                         </>
@@ -37,6 +42,11 @@ const myNav =()=>{
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+        <Modal
+            size="lg"
+            show={showModal}
+            onHide= {()=>{setShowModal(false)} }>
+        </Modal>
     </>
     )
 }

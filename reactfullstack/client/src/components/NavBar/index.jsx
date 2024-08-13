@@ -16,18 +16,28 @@ const myNav =()=>{
                     <Nav.Link as ={Link} to = "/">
                     Search For a Book
                     </Nav.Link>
-                    {Auth.isLoggedIn?
+                    {Auth.isLoggedIn() ?(
                     <>
-                    <Nav.Link as ={link} to ="./savedBooks">
-                        Your Saved Books
+                    <Nav.Link as ={Link} to ="./savedBooks">
                     </Nav.Link>
-                    </>
-                }
-                    </Nav>
+                        <Nav.Link onClick={Auth.removeToken}>
+                    </Nav.Link>   
+                    <Nav.Link>Logout</Nav.Link>
+                    </> 
+                    ):(
+                        <>
+                    <Nav.Link>
+                        Login / SignUp
+                    </Nav.Link>
+                        </>
+                    )
+                      }
+                  
+                  </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-        </>
+    </>
     )
 }
 

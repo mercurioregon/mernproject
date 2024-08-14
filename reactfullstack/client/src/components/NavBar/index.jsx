@@ -45,7 +45,25 @@ const myNav =()=>{
         <Modal
             size="lg"
             show={showModal}
-            onHide= {()=>{setShowModal(false)} }>
+            onHide= {()=>{setShowModal(false)} }
+                aria-labeledBy= "signup">
+                    <Tab.Container>
+                        <Modal.Header closeButton>
+                      <Modal.Title id="signup">
+                        <Nav variant="pills">
+                            <Nav.Item>
+                                <Nav.Link eventKey= "login">Login
+                                </Nav.Link>
+                                <Nav.Item>
+                                    <Nav.Link eventKey="signup">
+                                        Sign Up
+                                    </Nav.Link>
+                                </Nav.Item>
+                            </Nav.Item>
+                        </Nav>
+                      </Modal.Title>
+                        </Modal.Header>
+                    </Tab.Container>
         </Modal>
     </>
     )

@@ -4,15 +4,18 @@ import {Form, Button, Alert} from "react-bootstrap"
 import { useMutation } from "@apollo/client"
 
 import Auth from "../../utils/auth"
-const handleFormSubmit=()=>{
 
-}
- 
-const handleInputChange = ()=> {
-
-}
 const Login = () => {
     const [logInData, setLogInData]=useState({email:"", password:""})
+
+    const handleFormSubmit=()=>{
+
+    }
+     
+    const handleInputChange = (e)=> {
+        const {name,value} =e.target
+        setLogInData({...logInData, [name]:value})
+    }
 
     return (
         <>

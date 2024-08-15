@@ -9,10 +9,10 @@ const handleFormSubmit=()=>{
 }
  
 const handleInputChange = ()=> {
-    
+
 }
 const Login = () => {
-    const [logInData, setLogInData]=useState({email:"", password})
+    const [logInData, setLogInData]=useState({email:"", password:""})
 
     return (
         <>
@@ -23,11 +23,36 @@ const Login = () => {
                 type="text"
                 placeholder="youremail"
                 name="email"
-                onChange={handleInputChange}>
-                                    </Form.Control>
+                onChange={handleInputChange}
+                    value={logInData.email}
+                    required
 
+                                    ></Form.Control>
+                    <Form.Control.Feedback type="invalid">Correct Email Format Required</Form.Control.Feedback>
             </Form.Group>
+
+            <Form.Group className="mb-3">
+                <Form.Label htmlFor="pass">Password</Form.Label>
+                <Form.Control
+                type="text"
+                placeholder="yourpass"
+                name="pass"
+                onChange={handleInputChange}
+                    value={logInData.password}
+                    required
+
+                                    ></Form.Control>
+                    <Form.Control.Feedback type="invalid">Password Required</Form.Control.Feedback>
+            </Form.Group>
+            <Button
+            disabled= {!(logInData.email && logInData.password)}
+            type="submit"
+            variant="success"
+            >
+            Submit
+            </Button>
         </Form>
         </>
     )
 }
+export default Login

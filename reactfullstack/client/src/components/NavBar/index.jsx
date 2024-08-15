@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom"
-
-import {Navbar, Container, Tab, Modal, Nav} from "react-bootstrap"
+import {Navbar, Container, Tab, Modal, Nav, TabContainer} from "react-bootstrap"
 import Auth from "../../utils/auth"
 import {useState} from "react"
+import Login from "../Login"
 
 const myNav =()=>{
     const [showModal, setShowModal]= useState(false)
@@ -47,7 +47,7 @@ const myNav =()=>{
             show={showModal}
             onHide= {()=>{setShowModal(false)} }
                 aria-labeledBy= "signup">
-                    <Tab.Container>
+                    <Tab.Container defaultActiveKey={"login"}>
                         <Modal.Header closeButton>
                       <Modal.Title id="signup">
                         <Nav variant="pills">
@@ -63,6 +63,16 @@ const myNav =()=>{
                         </Nav>
                       </Modal.Title>
                         </Modal.Header>
+                        <Modal.Body >
+                            <Tab.Content>
+                                <Tab.Pane eventKey="login">
+                                <Login handleModalClose= {()=>{setShowModal}}></Login>
+                                </Tab.Pane>
+                                <Tab.Pane eventKey="signup">
+
+                                </Tab.Pane>
+                            </Tab.Content>
+                        </Modal.Body>
                     </Tab.Container>
         </Modal>
     </>

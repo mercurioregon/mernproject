@@ -39,7 +39,7 @@ const Login = () => {
                 <Form.Control
                 type="text"
                 placeholder="yourpass"
-                name="pass"
+                name="password"
                 onChange={handleInputChange}
                     value={logInData.password}
                     required

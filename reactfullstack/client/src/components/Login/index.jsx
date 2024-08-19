@@ -7,7 +7,7 @@ import Auth from "../../utils/auth"
 
 const Login = () => {
     const [logInData, setLogInData]=useState({email:"", password:""})
-    const [tryToLogin, {error}]=useMutation()
+    const [tryToLogin, {error}]=useMutation(USER_LOGIN)
 
     const handleFormSubmit=async (e)=>{
        e.preventDefault()
@@ -21,6 +21,8 @@ const Login = () => {
         const {data} = await tryToLogin({
             variables:{...formData}
         })
+        Auth.setToken(data.login.token)
+
     }catch(e){
         console.log(e)
     }
@@ -69,6 +71,7 @@ const Login = () => {
             </Button>
         </Form>
         </>
-    )
-}
+        )
+    }
+   }
 export default Login

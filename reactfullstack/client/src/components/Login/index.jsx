@@ -2,14 +2,27 @@ import {useState, useEffect} from "react"
 import {Form, Button, Alert} from "react-bootstrap"
 
 import { useMutation } from "@apollo/client"
-
+import {USER_LOGIN} from "../../utils/mutations"
 import Auth from "../../utils/auth"
 
 const Login = () => {
     const [logInData, setLogInData]=useState({email:"", password:""})
+    const [tryToLogin, {error}]=useMutation()
 
-    const handleFormSubmit=()=>{
+    const handleFormSubmit=async (e)=>{
+       e.preventDefault()
+       const formdata= e.currentTarget
 
+       if(formdata.checkValidity()){
+        e.preventDefault()
+        e.stopPropogation()
+       }
+       try{
+        const {data} = await tryToLogin({
+            variables:{...formData}
+        })
+    }catch(e){
+        console.log(e)
     }
      
     const handleInputChange = (e)=> {
